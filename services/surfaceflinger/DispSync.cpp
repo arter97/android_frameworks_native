@@ -294,7 +294,7 @@ DispSync::DispSync() :
         mRefreshSkipCount(0),
         mThread(new DispSyncThread()) {
 
-    mThread->run("DispSync", PRIORITY_URGENT_DISPLAY + PRIORITY_REALTIME);
+    mThread->run("DispSync", PRIORITY_REALTIME);
 
     reset();
     beginResync();
