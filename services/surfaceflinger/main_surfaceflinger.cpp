@@ -16,8 +16,6 @@
 
 #include <sys/resource.h>
 
-#include <sched.h>
-
 #include <cutils/sched_policy.h>
 #include <binder/IServiceManager.h>
 #include <binder/IPCThreadState.h>
@@ -55,12 +53,6 @@ int main(int, char**) {
     // publish surface flinger
     sp<IServiceManager> sm(defaultServiceManager());
     sm->addService(String16(SurfaceFlinger::getServiceName()), flinger, false);
-
-    struct sched_param param = {0};
-    param.sched_priority = 1;
-    if (sched_setscheduler(0, SCHED_FIFO, &param) != 0) {
-        ALOGE("Couldn't set SCHED_FIFO");
-    }
 
     // run in this thread
     flinger->run();
